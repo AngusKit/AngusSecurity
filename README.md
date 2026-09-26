@@ -40,19 +40,41 @@ AngusSecurity runs one check across code flaws, leaked secrets, and dependency/i
 
 ## Get the Community Edition (free)
 
+About **280 MB**. This zip is **AngusGM + AngusSecurity**. At least **2 cores / 4 GB** RAM and **40 GB** disk; reserve another **20 GB** for engines and vulnerability data. Docker Engine + Compose v2.
+
+This first-run path matches the official docs: Docker Compose, the install wizard, **access mode 2** (bundled Caddy), HTTP `:80` (no certificate).
+
+1. Resolve names to this machine (or add to `/etc/hosts` for a local trial). Public DNS name in the wizard is the **suffix** (e.g. `example.com`), not `gm.example.com`.
+
 ```bash
-curl -LO https://repo.anguskit.com/raw/raw-public/AngusKit/security/AngusSecurity-Community-1.0.0.zip
-unzip AngusSecurity-Community-1.0.0.zip
-cd AngusSecurity-1.0.0/docker
-cp env.example .env
-docker compose --profile mysql up -d
+127.0.0.1 gm.example.com security.example.com
 ```
 
-- Minimum: **2 cores / 4 GB** (recommended: 4 cores / 8 GB); disk 40 GB+ (scan engines add to this)
-- Ports after install: AngusGM `8801` (sign-in), AngusSecurity `8809`
-- Only need AngusSecurity? This zip includes AngusSecurity + AngusGM — no other product required.
+Open host **80**. App ports stay behind the proxy — do not use `localhost:8801`. A missing engine can be WARN while `doctor: OK` — that is not an install failure. Stop Nginx/Caddy/IIS if they already bind 80. On macOS + Docker Desktop, do not run `./install.sh` with `sudo`.
 
-Full installation guide (host ZIP, Kubernetes/Helm, TLS, upgrades, engine setup): **[docs.anguskit.com/security](https://www.anguskit.com/en/docs/security/latest/en/manual/02-install-deploy)**
+2. Download, unzip, and run the wizard from the package root:
+
+```bash
+curl --fail --location --progress-bar -o AngusSecurity-Community-1.0.0.zip \
+  https://repo.anguskit.com/raw/raw-public/AngusKit/security/AngusSecurity-Community-1.0.0.zip
+unzip AngusSecurity-Community-1.0.0.zip
+cd AngusSecurity-1.0.0
+./install.sh
+```
+
+Answer: Install mode `1` (Compose) → Access **`2`** (bundled reverse proxy — do not press Enter) → Proxy `1` (Caddy) → TLS **`4`** (HTTP `:80`, no certificate) → Database `1` (MySQL 8 in Compose) → Public DNS name = `example.com` → set admin password (default user `admin`). Wait for `Install finished.`
+
+3. Confirm health, then open the console:
+
+```bash
+./bin/angusctl.sh doctor
+```
+
+Look for `doctor: OK`. Open `http://gm.example.com/`, sign in, then open `http://security.example.com/`.
+
+Need the full suite? Use `AngusKit-Community-1.0.0.zip` from [AngusKit](https://github.com/AngusKit/AngusKit).
+
+First-run guide: **[security quickstart](https://www.anguskit.com/en/docs/security/get-started/quickstart)** · Full install (host ZIP, Helm preview, TLS, offline): **[install docs](https://www.anguskit.com/en/docs/security/latest/en/manual/02-install-deploy)**
 
 ## Community vs. Team / Enterprise vs. SaaS
 
@@ -64,7 +86,7 @@ Full installation guide (host ZIP, Kubernetes/Helm, TLS, upgrades, engine setup)
 | Scans | Up to 100 / month | Higher / unlimited | Per plan |
 | SCA, image deep scan, policy gates, Git/artifact integration, MCP | Not included (code defect + secret detection only) | Included | Per plan |
 
-Community Edition source is licensed under GPL-3.0 and distributed with each Community installation package. Team and Enterprise editions are proprietary, governed by the **XCan Business License, Version 1.0**, distributed only under a paid subscription.
+Community Edition source is licensed under GPL-3.0 and distributed with each Community installation package. Team and Enterprise editions are proprietary, governed by the **[XCan Business License, Version 1.0](https://www.anguskit.com/licenses/XCBL-1.0)** (XCBL-1.0), distributed only under a paid subscription.
 
 Full pricing and feature comparison: **[anguskit.com/pricing](https://www.anguskit.com/en/pricing)**
 
@@ -89,4 +111,4 @@ Full pricing and feature comparison: **[anguskit.com/pricing](https://www.angusk
 
 - This repository's documentation content: see [LICENSE](LICENSE) (GPL-3.0, matching the Community Edition source it describes).
 - AngusSecurity Community Edition product source: GPL-3.0, distributed with each Community installation package.
-- AngusSecurity Team / Enterprise Edition: proprietary, XCan Business License v1.0, distributed under a paid subscription only.
+- AngusSecurity Team / Enterprise Edition: proprietary, [XCan Business License, Version 1.0](LICENSE-XCBL-1.0) (XCBL-1.0) — see https://www.anguskit.com/licenses/XCBL-1.0. Distributed under a paid subscription only.
