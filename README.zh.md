@@ -86,7 +86,7 @@ cd AngusSecurity-1.0.0
 | 扫描次数 | 最多 100 次/月 | 更高/不限 | 按套餐 |
 | SCA、镜像深度扫描、策略门禁、Git/制品联动、MCP | 不含（仅代码缺陷 + 密钥检测） | 包含 | 按套餐 |
 
-社区版源码使用 GPL-3.0 协议，随社区版安装包一同分发。团队版与企业版为专有软件，受 **[XCan Business License, Version 1.0](https://www.anguskit.com/licenses/XCBL-1.0)**（XCBL-1.0）约束，仅随付费订阅提供。
+社区版源码使用 GPL-3.0 协议，随社区版安装包一同分发。团队版与企业版为专有软件，受 **[XCan Business License, Version 1.0](https://www.anguskit.com/zh/licenses/XCBL-1.0)**（XCBL-1.0）约束，仅随付费订阅提供。
 
 完整定价与功能对照：**[anguskit.com/pricing](https://www.anguskit.com/zh/pricing)**
 
@@ -111,4 +111,4 @@ cd AngusSecurity-1.0.0
 
 - 本仓库文档内容：见 [LICENSE](LICENSE)（GPL-3.0，与其描述的社区版源码保持一致）。
 - AngusSecurity 社区版产品源码：GPL-3.0，随每个社区版安装包分发。
-- AngusSecurity 团队版/企业版：专有软件，[XCan Business License, Version 1.0](LICENSE-XCBL-1.0)（XCBL-1.0）— 详见 https://www.anguskit.com/licenses/XCBL-1.0，仅随付费订阅提供。
+- AngusSecurity 团队版/企业版：专有软件，[XCan Business License, Version 1.0](LICENSE-XCBL-1.0)（XCBL-1.0）— 详见 https://www.anguskit.com/zh/licenses/XCBL-1.0，仅随付费订阅提供。
